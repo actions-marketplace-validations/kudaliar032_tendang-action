@@ -1,4 +1,4 @@
-name: 'Tedang Action'
+name: 'Tedang action'
 description: 'Simple and secure deployment proxy'
 inputs:
   url:
