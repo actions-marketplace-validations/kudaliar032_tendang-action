@@ -1,5 +1,8 @@
 name: 'Tedang action'
 description: 'Simple and secure deployment proxy'
+branding:
+  icon: 'arrow-right-circle'
+  color: 'gray-dark'
 inputs:
   url:
     description: 'Tendang proxy URL'
