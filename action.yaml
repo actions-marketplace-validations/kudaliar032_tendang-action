@@ -11,7 +11,7 @@ inputs:
     description: 'Deployment name'
     required: true
   value:
-    description: 'Deployment value for script parameters'
+    description: 'Deployment value'
     required: false
 runs:
   using: 'node16'
