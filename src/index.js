@@ -7,7 +7,7 @@ async function run() {
     const token = core.getInput('token', { required: true });
     const name = core.getInput('name', { required: true });
     const value = core.getInput('value');
-    const tendangResponse = tendang(url, token, name, value);
+    const tendangResponse = await tendang(url, token, name, value);
     core.info(tendangResponse);
   } catch (error) {
     core.setFailed(error.message);
