@@ -1,0 +1,17 @@
+name: Test tendang action
+on: push
+jobs:
+  test-action:
+    runs-on: ubuntu-latest
+    services:
+      tendang:
+        image: ghcr.io/kudaliar032/tendang:server
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run tendang action
+        uses: ./
+        with:
+          url: http://tendang:5000
+          token: ${{ secrets.TENDANG_TOKEN }}
+          name: xyz
