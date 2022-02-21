@@ -6,12 +6,14 @@ jobs:
     services:
       tendang:
         image: ghcr.io/kudaliar032/tendang:server
+        ports:
+          - 5000:5000
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Run tendang action
         uses: ./
         with:
-          url: http://tendang:5000
+          url: http://localhost:5000
           token: ${{ secrets.TENDANG_TOKEN }}
           name: xyz
