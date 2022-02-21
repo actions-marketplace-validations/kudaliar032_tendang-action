@@ -1,5 +1,5 @@
 const core = require('@actions/core');
-const axios = require('axios');
+const tendang = require('./tendang');
 
 async function run() {
   try {
@@ -7,26 +7,10 @@ async function run() {
     const token = core.getInput('token', { required: true });
     const name = core.getInput('name', { required: true });
     const value = core.getInput('value');
-    await axios({
-      method: 'post',
-      url,
-      data: {
-        token,
-        name,
-        value,
-      },
-    });
-    core.info('🎉 Deployment successfully.');
+    const tendangResponse = tendang(url, token, name, value);
+    core.info(tendangResponse);
   } catch (error) {
-    if (error.response && error.response.status === 401) {
-      core.setFailed('👮 Deployment unauthorized, please check your token or your deployment name.');
-    } else if (error.response && error.response.status === 400) {
-      core.setFailed('🚫 Deployment failed, request invalid check your value.');
-    } else if (error.response && error.response.status === 500) {
-      core.setFailed('❌ Deployment failed, please check tendang log.');
-    } else {
-      core.setFailed(error.message);
-    }
+    core.setFailed(error.message);
   }
 }
 

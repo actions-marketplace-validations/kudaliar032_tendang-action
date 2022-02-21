@@ -1,19 +1,25 @@
 name: Test tendang action
-on: push
+on:
+  push:
+    branches:
+      - main
+  pull_request_target:
+    branches:
+      - main
 jobs:
-  test-action:
+  unit-test:
     runs-on: ubuntu-latest
     services:
       tendang:
-        image: ghcr.io/kudaliar032/tendang:server
+        image: ghcr.io/kudaliar032/tendang:action-test
         ports:
           - 5000:5000
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Run tendang action
-        uses: ./
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
-          url: http://localhost:5000
-          token: ${{ secrets.TENDANG_TOKEN }}
-          name: xyz
+          node-version: '16'
+      - name: Run nodejs test
+        run: |
+          npm run lint
+          npm run test

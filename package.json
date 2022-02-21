@@ -4,9 +4,11 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "ncc build ./src/index.js --license licenses.txt",
+    "build": "ncc build ./src/index.js --license licenses.txt -m",
     "lint": "eslint ./src/",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "jest",
+    "test:watch": "jest --watch --coverage"
   },
   "keywords": [
     "tendang",
@@ -23,6 +25,7 @@
     "eslint": "^8.9.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.4",
-    "husky": "^7.0.4"
+    "husky": "^7.0.4",
+    "jest": "^27.5.1"
   }
 }
