@@ -19,11 +19,8 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - name: Run nodejs test
-        run: |
-          npm i
-          npm run lint
-          npm run test
+      - name: Jest coverage report
+        uses: ArtiomTr/jest-coverage-report-action@v2
   action-test:
     runs-on: ubuntu-latest
     services:
