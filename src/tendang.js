@@ -1,4 +1,5 @@
 const axios = require('axios');
+const messages = require('./messages');
 
 function tendang(url, token, name, value) {
   return new Promise((resolve, reject) => {
@@ -11,14 +12,16 @@ function tendang(url, token, name, value) {
         value,
       },
     }).then(() => {
-      resolve('🎉 Deployment successfully.');
+      resolve(messages.SUCCESS);
     }).catch((error) => {
       if (error.response && error.response.status === 401) {
-        reject(new Error('👮 Deployment unauthorized, please check your token or your deployment name.'));
+        reject(new Error(messages.UNAUTHORIZED));
       } else if (error.response && error.response.status === 400) {
-        reject(new Error('🚫 Deployment failed, request invalid check your value.'));
+        reject(new Error(messages.INVALID_VALUE));
       } else if (error.response && error.response.status === 500) {
-        reject(new Error('❌ Deployment failed, please check tendang log.'));
+        reject(new Error(messages.DEPLOYMENT_FAILED));
+      } else if (error.response && error.response.status === 504) {
+        reject(new Error(messages.DEPLOYMENT_TIMEOUT));
       } else {
         reject(new Error(`❌ ${error.message}`));
       }
